@@ -1,0 +1,1616 @@
+/*==================== GOOGLE FONTS ====================*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+/*==================== VARIABLES CSS ====================*/
+:root {
+    --header-height: 3rem;
+    --mb-1: 1rem;
+    --mb-1-5: 1.5rem;
+    --first-color: #4CAF50; /* A shade of green */
+    --first-color-second: #388E3C; /* A darker shade of green */
+    --first-color-alt: #2E7D32; /* Even darker green */
+    --first-color-lighter: #81C784; /* Lighter shade of green */
+    --title-color: #424242; /* Dark grey for titles */
+    --text-color: #616161; /* Slightly lighter grey for text */
+    --text-color-light: #9E9E9E; /* Light grey */
+    --input-color: #EEEEEE; /* Very light grey for inputs */
+    --body-color: #FFFFFF; /* White background */
+    --container-color: #FFFFFF; /* White container background */
+    --scroll-bar-color: #BDBDBD; /* Grey scrollbar */
+    --scroll-thumb-color: #757575; /* Darker grey scrollbar thumb */
+
+    /* Define green and grey color variables based on the theme */
+    --bg-blue: url('../assets/blue.png'); /* Keep original image variable */
+    --bg-green: url('../assets/green.png'); /* Keep original image variable */
+    --bg-orange: url('../assets/orange.png'); /* Keep original image variable */
+    --bg-pink: url('../assets/pink.png'); /* Keep original image variable */
+    --bg-red: url('../assets/red.png'); /* Keep original image variable */
+    --theme-green: #4CAF50; /* Primary green for theme */
+    --theme-green-dark: #388E3C; /* Darker green for theme */
+    --theme-grey-dark: #424242; /* Dark grey for theme */
+    --theme-grey-medium: #616161; /* Medium grey for theme */
+    --theme-grey-light: #9E9E9E; /* Light grey for theme */
+
+    /*========== Font and typography ==========*/
+    --body-font: 'Roboto', sans-serif;
+    --title-font: 'Roboto', sans-serif; /* Set title font to Roboto as well for consistency */
+
+    /* .5rem = 8px, 1rem = 16px, 1.5rem = 2n4px ... */
+    --big-font-size: 3rem;
+    --h1-font-size: 2rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1.5rem;
+    --small-font-size: .875rem;
+    --smaller-font-size: .75rem;
+
+    /*========== Font weight ==========*/
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-semi-bold: 600;
+    --font-bold: 700;
+
+    /*========== Margenes Bottom ==========*/
+    /* .25rem = 4px, .5rem = 8px, .75rem = 12px ... */
+    --mb-0-25: .25rem;
+    --mb-0-5: .5rem;
+    --mb-0-75: .75rem;
+    --mb-1: 1rem;
+    --mb-1-5: 1.5rem;
+    --mb-2: 2rem;
+    --mb-2-5: 2.5rem;
+    --mb-3: 3rem;
+
+    /*========== z index ==========*/
+    --z-tooltip: 10;
+    --z-fixed: 100;
+    --z-modal: 1000;
+}
+
+/* Font size for large devices */
+@media screen and (max-width: 850px) {
+    :root {
+        --big-font-size: 2.5rem;
+        --h1-font-size: 1.75rem;
+        --h2-font-size: 1.25rem;
+        --h3-font-size: 1rem;
+        --normal-font-size: .938rem;
+        --small-font-size: .813rem;
+        --smaller-font-size: .75rem;
+    }
+}
+
+/*==================== BASE ====================*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--body-color);
+  color: var(--text-color);
+  --current-bg-image: url('../assets/green.png'); /* Define CSS variable for background image */
+}
+
+/* Pseudo-element for blurred background image */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: var(--current-bg-image); /* Use the CSS variable here */
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  filter: blur(5px); /* Increased blur slightly for better text separation */
+  -webkit-filter: blur(2px); /* Increased blur slightly */
+  z-index: -1;
+  transition: background-image 0.5s ease-in-out;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--title-font);
+  color: var(--title-color);
+  font-weight: var(--font-bold);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*==================== REUSABLE CSS CLASSES ====================*/
+.section {
+  padding: 6rem 0 2rem;
+  position: relative; /* Needed for z-index context */
+  z-index: 1; /* Ensure sections are above the blurred background */
+  background-color: rgba(255, 255, 255, 0.85); /* Slightly less transparent background for better readability */
+}
+
+.section__title {
+  font-size: var(--h1-font-size);
+  color: var(--title-color); /* Keep dark color for contrast on white section background */
+  margin-bottom: var(--mb-3);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Add text shadow to titles */
+}
+
+.section__subtitle {
+  display: block;
+  font-size: var(--small-font-size);
+  margin-bottom: var(--mb-1-5);
+  font-weight: var(--font-medium);
+  color: var(--text-color-light); /* Keep lighter color */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Add text shadow to subtitles */
+}
+
+.section__title, 
+.section__subtitle {
+  text-align: center;
+}
+
+.container {
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1.25rem; /* Increased horizontal padding for consistent spacing */
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* Add rounded corners to sections/containers */
+.section,
+.contact__form,
+.why-choose-us__item,
+.visual-features__item,
+.testimonial__item,
+.partners__container,
+.contact__information,
+.contact__inputs,
+.about__container /* Add about__container to rounded corners */
+{
+    border-radius: .75rem;
+    overflow: hidden;
+    margin-bottom: 2rem; /* Add space between sections */
+}
+
+/* Remove bottom margin from the last section before the footer */
+.contact.section {
+    margin-bottom: 4rem; /* Reset bottom margin here, spacing will be handled by footer padding-top */
+}
+
+.header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--z-fixed);
+    background-color: var(--body-color);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
+}
+
+/*==================== NAV ====================*/
+.nav {
+  max-width: 1024px;
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nav__logo {
+    color: var(--title-color);
+    font-weight: var(--font-bold);
+    display: flex; /* Use flexbox to align logo and name */
+    align-items: center; /* Vertically align */
+    gap: 0.1rem; /* Space between logo image and name */
+}
+
+.nav__logo:hover {
+  color: var(--first-color);
+}
+
+.nav__logo-img {
+    height: 60px; /* Ensure consistent logo image size */
+}
+
+.nav__logo-name {
+    font-size: var(--h3-font-size); /* Adjust font size for company name */
+    color: var(--title-color); /* Color for company name */
+}
+
+.nav__toggle {
+  font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.nav__toggle:hover {
+    color: var(--first-color);
+}
+
+@media screen and (max-width: 767px) {
+  .nav__menu {
+    position: fixed;
+    top: 0; /* Position at the top */
+    right: -100%; /* Initially off-screen to the right */
+    width: 70%; /* Set a width for the mobile menu */
+    height: 100vh; /* Full viewport height */
+    background-color: var(--body-color);
+    padding: 2rem 1.5rem 4rem; /* Adjust padding */
+    box-shadow: -1px 0 4px rgba(0, 0, 0, .15); /* Adjust shadow for right side */
+    transition: .4s; /* Smooth transition */
+    z-index: var(--z-modal);
+    overflow-y: auto; /* Add scroll for long menus */
+}
+
+.nav__list {
+      flex-direction: column;
+      row-gap: 1.5rem;
+      align-items: flex-start; /* Align items to the left in the column layout */
+  }
+
+  .nav__item a {
+      padding: 0.75rem 0;
+  }
+
+   .nav__item .button {
+      margin-left: 0;
+  }
+
+  .nav__toggle {
+      display: block;
+    color: var(--title-color);
+      position: absolute; /* Position toggle button */
+      top: 1rem; /* Adjust vertical position */
+      right: 1rem; /* Adjust horizontal position */
+      z-index: var(--z-fixed); /* Ensure toggle is above other content */
+}
+
+.nav__close{
+    position: absolute;
+      top: 1rem; /* Position close button */
+      right: 1.5rem; /* Adjust horizontal position */
+      font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--first-color);
+      display: block;
+}
+}
+
+/* show menu */
+.nav__menu.show-menu{
+    right: 0; /* Slide in from the right */
+}
+
+/* Hide menu toggle and close button on larger screens */
+@media screen and (min-width: 768px) {
+    .nav__toggle,
+    .nav__close {
+        display: none !important;
+    }
+
+    .nav__list {
+        flex-direction: row;
+        column-gap: 2rem;
+        align-items: center;
+    }
+
+    .nav__item a {
+        padding: 0;
+    }
+
+     .nav__item .button {
+        margin-left: var(--mb-1);
+    }
+
+    .nav{
+        height: calc(var(--header-height) + 2.5rem); /* Increase header height slightly more for larger screens */
+    }
+}
+
+.nav__list {
+    display: flex;
+    column-gap: 2rem;
+    align-items: center; /* Align items vertically in the flex container */
+}
+
+.nav__item a {
+    text-decoration: none;
+    color: var(--text-color); /* Text color for links */
+    font-size: small;
+    font-weight: var(--font-medium);
+    transition: .3s;
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack icon above text */
+    align-items: center; /* Center icon and text horizontally */
+    padding: 0.5rem 0; /* Add some vertical padding to nav items */
+}
+
+.nav__item a:hover {
+    color: var(--first-color);
+}
+
+.nav__icon{
+    font-size: 5px; /* Increased icon size */
+    margin-right: 0;
+    margin-bottom: var(--mb-0-25);
+    color: var(--container-color); /* Changed icon color to white for visibility on white background */
+}
+
+.nav__close:hover{
+    color: var(--first-color-alt);
+}
+
+/* Active link */
+.active-link{
+    color: var(--first-color);
+}
+
+/* Change background header */
+.scroll-header{
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
+}
+
+/*==================== HOME ====================*/
+.home.section {
+    padding: 0;
+}
+
+.home__container{
+    height: calc(100vh - var(--header-height));
+    align-content: center;
+}
+
+.home__content{
+    grid-template-columns: 1fr;
+    row-gap: 3rem;
+    text-align: center;
+}
+
+
+.home__title{
+    font-size: xx-large;
+    margin-bottom: var(--mb-0-75);
+    color: gray;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8); /* Stronger text shadow for main title */
+}
+
+.home__subtitle{
+    font-size: var(--h3-font-size);
+    margin-top: 0px;
+    color: black; /* White color for subtitle */
+
+}
+
+.home__description{
+    color: gray; /* White color for description */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/*==================== REUSABLE BUTTONS ====================*/
+.button{
+    display: inline-block;
+    background-color: whitesmoke;
+    color: var(--white-color);
+    padding: .5rem 1rem;
+    border-radius: 4rem;
+    font-weight: var(--font-medium);
+    transition: .3s;
+    margin-top: var(--mb-1);
+}
+
+.button:hover{
+    background-color: red;
+}
+/*
+.button__icon{
+    display: inline-block;
+    color: var(--white-color);
+    padding: .5rem 1rem;
+    border-radius: 4rem;
+    font-weight: var(--font-medium);
+    transition: .3s;
+}*/
+
+.button--white{
+    background-color: var(--white-color);
+    color: var(--first-color);
+}
+
+.button--white:hover{
+    background-color: var(--white-color);
+    color: var(--first-color-alt);
+}
+
+.button--flex{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button--small{
+    padding: .75rem 1.5rem;
+}
+
+.button--link{
+    padding: 0;
+    background-color: transparent;
+    color: var(--first-color);
+}
+
+.button--link:hover{
+    color: var(--first-color-alt);
+}
+
+/*==================== WHY CHOOSE US ====================*/
+.why-choose-us.section {
+  background-color: rgba(206, 243, 252, 0.85); /* Slightly less transparent */
+}
+
+.why-choose-us__container {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.why-choose-us__item {
+  background-color: rgba(72, 239, 211, 0.204);
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 4px rgb(3, 76, 99);
+}
+
+.why-choose-us__item h3 {
+  margin-bottom: var(--mb-0-5);
+  color: var(--title-color);
+}
+
+.why-choose-us__item p {
+    color: var(--text-color); /* Ensure text color is readable */
+}
+
+/* Add styling for potential icons if added later */
+.why-choose-us__item .icon {
+    font-size: 3rem; /* Larger icon size */
+    color: var(--first-color);
+    margin-bottom: var(--mb-1);
+}
+
+/*==================== ABOUT ====================*/
+.about.section {
+    background-color: transparent; /* Make background transparent to see the main section background */
+    padding-top: 6rem; /* Adjust padding top to accommodate title/subtitle */
+}
+
+.about__container{
+    /* Existing grid properties will likely work, may need adjustments */
+    position: relative; /* Needed for positioning child elements */
+    background-color: var(--container-color); /* White background for the main content area */
+    padding: 3rem 1.25rem; /* Adjusted padding to accommodate title/subtitle outside and overlap */
+    border-radius: .75rem; /* Already added above, but good to be explicit */
+    margin-top: 6rem; /* Increased margin-top to make space for the values box above, adjusted */
+    overflow: visible; /* Allow the absolutely positioned values box to be visible outside */
+}
+
+.about__content{
+    display: flex; /* Use flexbox to arrange description and VM section */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center align items */
+    padding-top: 5rem; /* Add padding at the top of content to push it below the values box */
+}
+
+.about__description{
+    text-align: center; /* Center align description text */
+    margin-bottom: 2rem; /* Space below description */
+    font-size: var(--h3-font-size); /* Increased font size for description */
+    color: var(--theme-grey-dark); /* Dark grey color for description */
+    max-width: 800px; /* Limit width of description for better readability */
+}
+
+.about__values{
+    position: absolute; /* Position absolutely to overly the container */
+    top: 0; /* Position at the top of the container */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center horizontally and pull up by half its height */
+    background-color: var(--theme-green); /* Green background for values */
+    color: white; /* White text for values */
+    padding: 1.5rem 2rem; /* Padding inside the values box */
+    border-radius: .75rem; /* Rounded corners */
+    display: flex; /* Arrange value items horizontally */
+    justify-content: space-around; /* Distribute space around items */
+    width: 80%; /* Adjust width as needed */
+    max-width: 700px; /* Set a max-width for the values box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for the overlay effect */
+    z-index: 10; /* Ensure it's above other content */
+}
+
+.about__value-item{
+    display: flex; /* Arrange icon and text vertically */
+    flex-direction: column; /* Stack icon and text */
+    align-items: center; /* Center align icon and text */
+    text-align: center; /* Center text */
+}
+
+.about__value-item i{
+    font-size: 2rem; /* Size of icons */
+    margin-bottom: .5rem; /* Space between icon and text */
+}
+
+.about__value-item span{
+    font-size: var(--normal-font-size); /* Font size for value text */
+    font-weight: var(--font-medium); /* Medium font weight */
+}
+
+.about__vm{
+    display: grid; /* Use grid for two columns */
+    grid-template-columns: 1fr; /* Single column by default */
+    gap: 2rem; /* Space between vision and mission */
+    margin-top: 0; /* No margin top here */
+    padding-top: 0; /* Remove padding top, spacing handled by about__content padding-top */
+    align-items: flex-start; /* Align items to the start */
+    position: relative; /* Needed to establish positioning context for potential future elements */
+    z-index: 1; /* Ensure VM section is below the values box */
+}
+
+.about__vision,
+.about__mission{
+    flex: 1; /* Allow items to grow and shrink (less relevant with grid but good practice) */
+    text-align: left; /* Align text to the left within each column */
+    background-color: var(--container-color); /* White background for vision/mission boxes */
+    padding: 2rem; /* Increased padding for vision/mission boxes */
+    border-radius: .5rem; /* Rounded corners for vision/mission boxes */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for boxes */
+}
+
+.about__vision i,
+.about__mission i{
+     font-size: 2rem; /* Increased size of vision/mission icons */
+     color: var(--theme-green); /* Green color for icons */
+     margin-bottom: .75rem; /* Space below icon */
+     display: block; /* Ensure icon is on its own line */
+}
+
+.about__vision h3,
+.about__mission h3{
+    font-size: var(--h3-font-size); /* Font size for Vision/Mission titles */
+    color: var(--theme-green-dark); /* Darker green for titles */
+    margin-bottom: .75rem; /* Space below title */
+}
+
+.about__vision p,
+.about__mission p{
+    font-size: var(--normal-font-size); /* Font size for Vision/Mission text */
+    color: var(--theme-grey-medium); /* Medium grey for text */
+}
+
+.about__content .button{
+    margin-top: 3rem; /* Increased space above the Know More button */
+}
+
+/* Responsive adjustments */
+@media screen and (min-width: 768px) {
+     .about__container{
+         margin-top: 8rem; /* Keep margin-top consistent with smaller screens */
+         padding: 3rem 1.25rem; /* Keep padding consistent */
+    }
+
+    .about__content{
+        flex-direction: column; /* Still stack vertically on larger screens */
+        padding-top: 6rem; /* Increased padding top for more space below values box */
+    }
+
+    .about__vm{
+        grid-template-columns: repeat(2, 1fr); /* Two columns on larger screens */
+        text-align: left; /* Align text to the left */
+        align-items: flex-start; /* Align items to the start */
+        padding-top: 0rem; /* Remove padding top, spacing handled by about__content padding-top */
+    }
+
+    .about__vision,
+    .about__mission{
+         text-align: left; /* Align text to the left */
+    }
+
+     .about__value-item{
+        flex-direction: row; /* Arrange icon and text horizontally */
+        gap: 0.5rem; /* Space between icon and text */
+    }
+
+    .about__values{
+         top: 0; /* Position at the top of the container */
+         transform: translate(-50%, -50%); /* Center horizontally and pull up by half its height */
+         width: 80%; /* Adjust width for larger screens */
+         max-width: 700px; /* Set a max-width for the values box */
+    }
+
+     .about__vision i,
+    .about__mission i{
+        display: inline-block; /* Display icons inline with title on larger screens */
+        margin-right: .5rem; /* Space between icon and title */
+        margin-bottom: 0; /* Remove bottom margin */
+    }
+
+     .about__vision h3,
+    .about__mission h3{
+        display: inline-block; /* Display titles inline with icons */
+    }
+}
+
+@media screen and (max-width: 767px) {
+     .about__container{
+         margin-top: 6rem; /* Adjusted margin-top for smaller screens */
+         padding-top: 5rem; /* Adjusted padding top for smaller screens for values box overlap */
+     }
+
+    .about__values{
+        flex-direction: column; /* Stack values vertically on smaller screens */
+        width: 90%; /* Adjust width for smaller screens */
+        padding: 1.5rem 1rem; /* Adjust padding */
+        top: 0; /* Position at the top of the container */
+        transform: translate(-50%, -50%); /* Center horizontally and pull up */
+    }
+
+    .about__value-item{
+        margin-bottom: 1rem; /* Space between stacked value items */
+    }
+
+    .about__value-item:last-child{
+        margin-bottom: 0; /* No bottom margin for the last item */
+    }
+
+    .about__vm{
+         margin-top: 0rem; /* Remove negative margin */
+         padding-top: 4rem; /* Add padding to create space below values box */
+    }
+
+     .about__vision i,
+    .about__mission i{
+         display: block; /* Stack icons above title on smaller screens */
+         margin-right: 0; /* Remove right margin */
+         margin-bottom: .5rem; /* Restore bottom margin */
+    }
+
+     .about__vision h3,
+    .about__mission h3{
+        display: block; /* Stack titles below icons */
+    }
+}
+
+.section__title,
+.section__subtitle{
+    text-align: center;
+    /* Adjusted margin bottom and positioning to be above the values box */
+    margin-bottom: 0.5rem; /* Space below title */
+    position: relative; /* Needed for z-index */
+    z-index: 1; /* Ensure title/subtitle are above other content */
+}
+
+.section__subtitle{
+    text-align: center;
+    /* Adjusted margin bottom and positioning to be above the values box */
+    margin-bottom: 0.5rem; /* Space below title */
+    position: relative; /* Needed for z-index */
+    z-index: 1; /* Ensure title/subtitle are above other content */
+    color: var(--title-color); /* Set color for title/subtitle outside the white container */
+}
+
+.section__subtitle{
+     margin-bottom: 5rem; /* Increased margin below subtitle to make space for values box */
+     color: var(--text-color-light); /* Set color for subtitle outside the white container */
+}
+
+/*==================== VISUAL SERVICES/FEATURES ====================*/
+.visual-features.section {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+}
+
+.visual-features__container {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid for items */
+    gap: 1.5rem; /* Space between grid items */
+    padding: 1.5rem; /* Inner padding */
+}
+
+.visual-features__item {
+    background-color: var(--container-color); /* White background for each item */
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+.visual-features__img {
+    border-radius: .5rem; /* Slightly smaller border radius for images */
+    margin-bottom: var(--mb-1);
+}
+
+.visual-features__item h3 {
+    margin-bottom: var(--mb-0-5);
+    color: var(--title-color); /* Ensure title color is readable */
+}
+
+.visual-features__item p {
+    color: var(--text-color); /* Ensure text color is readable */
+}
+
+/* Add potential overlay for number/icon if added later */
+.visual-features__overlay {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    font-size: 2rem;
+    color: var(--white-color);
+    font-weight: var(--font-bold);
+    z-index: 1;
+}
+
+/*==================== TESTIMONIALS ====================*/
+.testimonials.section {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+}
+
+.testimonials__container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid for testimonials */
+    gap: 1.5rem; /* Space between items */
+    padding: 1.5rem; /* Inner padding */
+}
+
+.testimonial__item {
+    background-color: var(--container-color); /* White background */
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: center; /* Center text */
+}
+
+.testimonial__item p {
+    font-style: italic; /* Italicize testimonial text */
+    margin-bottom: var(--mb-1);
+    color: var(--text-color); /* Ensure text color is readable */
+}
+
+.testimonial__item h4 {
+    margin-bottom: var(--mb-0-25);
+    color: var(--title-color); /* Ensure name color is readable */
+}
+
+.testimonial__item span {
+    font-size: var(--small-font-size);
+    color: var(--text-color-light); /* Lighter color for company */
+}
+
+/* Optional: Add styling for a quote icon if needed */
+.testimonial__item .quote-icon {
+    font-size: 3rem;
+    color: var(--first-color);
+    margin-bottom: var(--mb-1);
+    display: block;
+}
+
+/*==================== PARTNERS ====================*/
+.partners.section {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    text-align: center; /* Center content */
+}
+
+.partners__container {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Responsive grid for logos */
+    gap: 1.5rem; /* Space between logos */
+    padding: 1.5rem; /* Inner padding */
+    align-items: center; /* Vertically align logos */
+    justify-items: center; /* Horizontally align logos */
+}
+
+.partners__container img {
+    max-width: 100px; /* Limit logo size */
+    opacity: 0.8; /* Slightly reduce opacity */
+    transition: opacity 0.3s ease-in-out;
+}
+
+.partners__container img:hover {
+    opacity: 1; /* Full opacity on hover */
+}
+
+/*==================== CONTACT US / REQUEST A CALL BACK ====================*/
+.contact.section {
+    background-color: rgba(255, 255, 255, 0.85); /* Slightly less transparent */
+    margin-bottom: 4rem; /* Reset bottom margin here, spacing will be handled by footer padding-top */
+}
+
+.contact__container{
+    grid-template-columns: 1fr; /* Default to single column */
+    gap: 2rem; /* Increased gap for better separation */
+    padding: 1.5rem; /* Inner padding */
+}
+
+@media screen and (min-width: 768px) {
+    .contact__container{
+        grid-template-columns: repeat(2, 1fr); /* Two columns on larger screens */
+        align-items: flex-start; /* Align items to the top */
+        gap: 1rem; /* Increased gap between columns on larger screens */
+    }
+
+    .contact__left {
+        display: grid; /* Use grid for map and info group */
+        grid-template-columns: 1fr; /* Stack map and info vertically */
+        gap: 1rem; /* Space between map and info group */
+    }
+
+    .contact__information-group {
+        display: grid; /* Use grid for contact info items */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid for info items */
+        gap: 1rem; /* Space between info items */
+    }
+
+    .contact__right {
+        display: grid; /* Use grid for form and product image */
+        grid-template-columns: 1fr; /* Stack form and image vertically */
+        gap: 1rem; /* Space between form and image */
+    }
+
+    .contact__form{
+         grid-template-columns: 1fr; /* Ensure form itself is a single column within its container */
+         gap: 1rem; /* Space within the form */
+    }
+
+     .contact__inputs{
+        grid-template-columns: repeat(2, 1fr); /* Two columns for name and email */
+        gap: 1rem; /* Space between inputs */
+        margin-bottom: var(--mb-1-5); /* Space below inputs */
+    }
+
+     .contact__content:nth-child(3) { /* Style for the message textarea */
+        grid-column: span 2; /* Make textarea span two columns */
+    }
+
+    #map iframe {
+        width: 100%;
+        min-height: 300px;
+        border-radius: .75rem;
+    }
+
+    .contact__product-image {
+        /* Style for the product image container */
+        display: block; /* Ensure container is a block element */
+        /* You might want to add specific max-width or height here */
+    }
+
+    .contact__product-image img {
+        display: block; /* Ensure image is a block element */
+        max-width: 100%; /* Make image responsive within its container */
+        height: auto; /* Maintain aspect ratio */
+        border-radius: .75rem; /* Add rounded corners to the image */
+    }
+
+    /* Remove explicit order as HTML structure now controls order */
+    .contact__information:nth-child(2),
+    .contact__information:nth-child(3),
+    .contact__information:nth-child(4) {
+        order: initial; 
+    }
+
+    #map {
+         order: initial; 
+    }
+}
+
+#map iframe {
+    width: 100%; /* Make map responsive */
+    min-height: 300px; /* Minimum height for the map */
+    border-radius: .75rem; /* Apply rounded corners to the map iframe */
+}
+
+.contact__information{
+    background-color: var(--container-color); /* White background */
+    padding: 1rem; /* Inner padding */
+    display: flex; /* Use flexbox for icon and text */
+    align-items: center; /* Align items vertically */
+    gap: 1rem; /* Space between icon and text */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.contact__icon{
+    font-size: 1.5rem;
+    color: var(--first-color);
+}
+
+.contact__title{
+    font-size: var(--h3-font-size);
+    color: var(--title-color); /* Ensure title color is readable */
+}
+
+.contact__subtitle{
+    font-size: var(--small-font-size);
+    color: var(--text-color); /* Ensure subtitle color is readable */
+}
+
+.contact__form{
+    background-color: var(--container-color); /* White background */
+    padding: 1.5rem; /* Inner padding */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.contact__inputs{
+    grid-template-columns: 1fr; /* Single column for inputs by default */
+    gap: 1rem; /* Space between inputs */
+    margin-bottom: var(--mb-1-5); /* Space below inputs */
+}
+
+@media screen and (min-width: 768px) {
+    .contact__inputs{
+        grid-template-columns: repeat(2, 1fr); /* Two columns for name and email on larger screens */
+    }
+     .contact__content:nth-child(3) { /* Style for the message textarea */
+        grid-column: span 2; /* Make textarea span two columns */
+    }
+}
+
+.contact__label{
+    display: block; /* Label on its own line */
+    font-size: var(--smaller-font-size);
+    color: var(--text-color-light);
+    margin-bottom: var(--mb-0-25);
+}
+
+.contact__input{
+    width: 100%; /* Full width input */
+    padding: .75rem 1rem;
+    border: 1px solid var(--input-color);
+    border-radius: .5rem; /* Rounded borders for inputs */
+    background-color: var(--input-color);
+    color: var(--text-color);
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+}
+
+textarea.contact__input{
+    resize: none; /* Prevent textarea resizing */
+    height: 100px; /* Fixed height for textarea */
+}
+
+.contact__form .button--flex{
+    width: 100%; /* Full width button */
+    justify-content: center; /* Center button content */
+}
+
+
+
+/* Newsletter Section Styling */
+.newsletter-section {
+    background-color: hsla(206, 92%, 10%, 0.942); /* Blue background from the design */
+    color: var(--container-color); /* White text color */
+    padding: 3rem 3rem; /* Padding for the newsletter section */
+    margin-bottom: -10px; /* Increased negative margin for more overlap */
+    position: relative; /* Needed for z-index */
+    z-index: 1; /* Ensure it's above the main footer */
+    border-radius: 3rem; /* Rounded corners for the newsletter box */
+    /* Adjust width and center */
+    max-width: 900px; /* Set a max width */
+    margin-left: auto; /* Center the block */
+    margin-right: auto; /* Center the block */
+    transform: translateY(-50px); /* Adjusted pull-up amount */
+}
+
+@media screen and (max-width: 960px) {
+    .newsletter-section {
+         margin-left: 1rem;
+         margin-right: 1rem;
+         max-width: calc(100% - 2rem);
+         transform: translateY(-40px); /* Adjusted transform */
+         margin-bottom: -70px; /* Adjusted negative margin */
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .newsletter-section {
+    padding: 2rem 0;
+        margin-bottom: -30px;
+        transform: translateY(-15px);
+  }
+
+    .newsletter-container {
+    text-align: center;
+        padding: 0 1rem;
+    }
+}
+
+.newsletter-content {
+    display: flex; /* Use flexbox to arrange image and text */
+    align-items: center; /* Vertically align items in the flex container */
+    gap: 2rem; /* Space between image and text */
+}
+
+@media screen and (max-width: 767px) {
+    .newsletter-content {
+        flex-direction: column; /* Stack image above text on small screens */
+        text-align: center; /* Center text when stacked */
+        gap: 1.5rem; /* Adjust gap when stacked */
+    }
+}
+
+.newsletter-graphic {
+    max-width: 200px; /* Slightly smaller graphic */
+    display: block;
+    margin: 0 auto;
+}
+
+.newsletter-text h3 {
+    font-size: var(--h2-font-size);
+    margin-bottom: var(--mb-0-75);
+    color: var(--container-color);
+}
+
+.newsletter-text p {
+    font-size: var(--normal-font-size);
+    margin-bottom: var(--mb-1-5);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: var(--mb-1);
+}
+
+@media screen and (max-width: 400px) {
+    .newsletter-form {
+    flex-direction: column;
+    }
+}
+
+.newsletter-input {
+    flex-grow: 1;
+    padding: 0.75rem 1rem;
+    border-radius: .5rem;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.3); /* Slightly less transparent */
+    color: var(--container-color);
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+}
+
+.newsletter-input::placeholder {
+    color: rgba(255, 255, 255, 0.9); /* Lighter placeholder */
+}
+
+.newsletter-button {
+    background-color: var(--container-color);
+    color: #42A5F5;
+    padding: 0.75rem 1.5rem;
+    border-radius: .5rem;
+    border: none;
+    font-weight: var(--font-medium);
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.newsletter-button:hover {
+    background-color: rgba(255, 255, 255, 0.9); /* Closer to solid white on hover */
+}
+
+.newsletter-info {
+    font-size: var(--smaller-font-size);
+    color: rgba(255, 255, 255, 0.8); /* Slightly less transparent */
+}
+
+.newsletter-privacy-link {
+    color: var(--container-color); /* White link */
+    text-decoration: underline;
+}
+
+/* Main Footer Content Styling */
+.footer-main {
+    background-color: var(--body-color); /* Explicitly set white background */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 3fr));
+    padding-top: 1rem; /* Increased top padding to ensure space below newsletter and accommodate overlap */
+    margin-bottom: .2rem;
+    border-radius: 30px;
+    z-index: 1;
+}
+
+.footer-column h3 {
+    font-size: var(--h3-font-size);
+    margin-bottom: var(--mb-1);
+    color: var(--title-color); /* Dark grey title color */
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: var(--mb-0-75); /* Space below logo */
+}
+
+.footer-logo-img {
+    height: 30px; /* Adjust logo size */
+}
+
+.footer-logo-name {
+    font-size: var(--h3-font-size);
+    color: var(--title-color);
+}
+
+.footer-description {
+    font-size: var(--small-font-size);
+    color: var(--text-color);
+    margin-bottom: var(--mb-1-5); /* Space below description */
+}
+
+
+.footer-social-icon:hover {
+    color: var(--first-color); /* Green color on hover */
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: var(--mb-0-5); /* Space between list items */
+}
+
+.footer-link {
+    text-decoration: none;
+    font-size: var(--normal-font-size);
+    color: var(--text-color);
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-link:hover {
+    color: var(--first-color); /* Green color on hover */
+}
+
+.footer-contact-info p {
+    font-size: var(--normal-font-size);
+    color: var(--text-color);
+    margin-bottom: var(--mb-0-5); /* Space between contact lines */
+    display: flex; /* Use flexbox for icon and text */
+    align-items: center; /* Vertically align */
+    gap: 0.5rem; /* Space between icon and text */
+}
+
+.footer-contact-icon {
+    font-size: 1.2rem;
+    color: var(--first-color); /* Green icon color */
+}
+
+/* Copyright Bar Styling */
+.footer-bottom {
+    padding: 1rem 0; /* Padding for the copyright bar */
+    background-color: #FFFFFF;
+}
+
+.footer-bottom .container {
+    display: flex; /* Arrange copy and legal links horizontally */
+    justify-content: space-between; /* Space out content */
+    align-items: center; /* Vertically align */
+}
+
+@media screen and (max-width: 767px) {
+    .footer-bottom .container {
+        flex-direction: column; /* Stack content on small screens */
+        text-align: center; /* Center text */
+        gap: 1rem; /* Space between stacked items */
+    }
+}
+
+.footer-copy {
+    font-size: var(--smaller-font-size);
+    color: var(--text-color-light); /* Light grey copyright text */
+}
+
+.footer-legal-links {
+    display: flex;
+    gap: 1rem; /* Space between legal links */
+}
+
+.footer-legal-link {
+    font-size: var(--smaller-font-size);
+    color: var(--text-color-light); /* Light grey legal links */
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-legal-link:hover {
+    color: var(--text-color); /* Darker grey on hover */
+  }
+
+
+
+/*========== SCROLL BAR ==========*/
+::-webkit-scrollbar{
+    width: .60rem;
+    background-color: var(--scroll-bar-color);
+    border-radius: .5rem;
+}
+
+::-webkit-scroll-thumb{
+    background-color: var(--scroll-thumb-color);
+    border-radius: .5rem;
+}
+
+::-webkit-scroll-thumb:hover{
+    background-color: var(--scroll-thumb-color);
+}
+
+/*==================== MEDIA QUERIES ====================*/
+/* For small devices */
+@media screen and (max-width: 350px) {
+    .container {
+        margin-left: var(--mb-1);
+        margin-right: var(--mb-1);
+    }
+    .nav__menu{
+        padding: 2rem .25rem 4rem;
+    }
+    .home__grid{
+        grid-template-columns: .25fr 3fr;
+    }
+    .home__blob{
+        width: 180px;
+    }
+
+    .about__info{
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .contact__inputs{
+        grid-template-columns: 1fr;
+    }
+}
+
+/* For medium devices */
+@media screen and (min-width: 568px) {
+    .home__content{
+        grid-template-columns: max-content 1fr 1fr;
+    }
+    .home__data{
+        grid-column: initial;
+    }
+    .home__img{
+        order: 1;
+        justify-self: center;
+    }
+
+    .about__container{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact__container{
+        grid-template-columns: 1fr .75fr;
+    }
+    .contact__information{
+        padding-right: 1.5rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .container{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    body{
+        margin: 0;
+    }
+
+    .section{
+        padding: 6rem 0 2rem;
+    }
+
+    .section__subtitle{
+        margin-bottom: 4rem;
+    }
+
+    .header{
+        top: 0;
+        bottom: initial;
+    }
+
+    .header,
+    .main,
+    .footer__container{
+        padding: 0 1rem;
+    }
+
+    .nav{
+        height: calc(var(--header-height) + 2rem); /* Increase header height slightly */
+    }
+
+    .nav__icon,
+    .nav__close,
+    .nav__toggle{
+        display: none;
+    }
+
+    .nav__list{
+        display: flex;
+        column-gap: 2rem;
+    }
+
+    .nav__menu{
+        margin-left: auto;
+    }
+
+    .change__theme{
+        margin: 0;
+    }
+
+    .home__container{
+        row-gap: 5rem;
+    }
+
+    .home__content{
+        padding-top: 8rem;
+        column-gap: 2rem;
+    }
+
+    .home__blob{
+        width: 270px;
+    }
+
+    .nav__btns{
+        margin-left: auto;
+    }
+
+    .home__scroll{
+        display: block;
+    }
+
+    .home__scroll-button{
+        margin-left: 3rem;
+    }
+
+    .about__container{
+        column-gap: 5rem;
+    }
+
+    .about__img{
+        width: 350px;
+    }
+
+    .about__description{
+        text-align: initial;
+    }
+
+    .about__info{
+        justify-content: space-between;
+    }
+
+    .about__buttons{
+        justify-content: initial;
+    }
+
+    .contact__container{
+        column-gap: 3rem;
+    }
+    .contact__information{
+        margin-bottom: var(--mb-2);
+    }
+
+    .footer__container{
+        grid-template-columns: repeat(3, 1fr);
+        padding-top: 3rem;
+    }
+    .footer__bg{
+        padding: 3rem 0 3.5rem;
+    }
+    .footer__links{
+        flex-direction: row;
+        column-gap: 2rem;
+    }
+    .footer__socials{
+        justify-self: flex-end;
+    }
+    .footer__copy{
+        order: -1;
+        font-size: var(--smaller-font-size);
+    }
+
+    .footer__container{
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 2rem;
+        align-items: center;
+        text-align: left;
+    }
+
+    .footer__title,
+    .footer__subtitle {
+        text-align: left;
+    }
+
+    .footer__socials{
+        justify-content: center;
+        margin-bottom: 0;
+    }
+
+    .footer__copy{
+        text-align: right;
+        margin-top: 0;
+    }
+
+    .footer-main {
+        padding-top: 10rem; /* Further increased top padding on larger screens */
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .main{
+        padding: 0;
+    }
+    .container{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .home__blob{
+        width: 320px;
+    }
+    .home__scroll-button{
+        margin-left: 6rem;
+    }
+
+    .portfolio__content{
+        padding-right: 0;
+    }
+
+    .swiper-container{
+        width: 780px;
+    }
+    .swiper-button-prev{
+        left: -3.5rem;
+    }
+    .swiper-button-next{
+        right: -3.5rem;
+    }
+    .swiper-container-horizontal > .swiper-pagination-bullets{
+        bottom: -4.5rem;
+    }
+
+    .footer__container{
+        column-gap: 3rem;
+    }
+    .footer__socials{
+        justify-self: end;
+    }
+    .footer__copy{
+        margin-top: 4.5rem;
+    }
+}
+
+
+
+/*NEW CSS FROM ANONYMOUS PLACE*/  
+.header *,
+.footer * {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+  
+.nav__menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.nav__logo-img {
+    height: 50px;
+}
+  
+.nav__list {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+  
+.nav__item a {
+    text-decoration: none;
+    color: var(--black-color);
+    font-size: var(--normal-font-size);
+}
+  
+.home {
+    margin-top: 5rem;
+}
+  
+  .section__title {
+    text-align: center;
+    font-size: var(--big-font-size);
+    margin-bottom: var(--mb-1-5);
+}
+  
+.about__container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--mb-1-5);
+    align-items: center;
+    text-align: center;
+}
+  
+.about__img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 1rem;
+    margin: 0 auto;
+}
+  
+.contact__icon {
+    font-size: 2rem;
+    color: var(--first-color);
+}
+ 
+.contact__inputs {
+    display: grid;
+    gap: var(--mb-1-5);
+    grid-template-columns: 1fr;
+  }
+  
+.contact__input {
+    padding: 1rem;
+    border-radius: .5rem;
+    border: 1px solid var(--black-color);
+}
+  
+.button--flex {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .75rem 1.5rem;
+    background-color: var(--first-color);
+    color: var(--white-color);
+    border-radius: .5rem;
+    text-decoration: none;
+    font-size: var(--normal-font-size);
+    transition: background-color .3s;
+}
+  
+  .button--flex:hover {
+    background-color: var(--first-color-alt);
+}
+  
+/* Add specific styling for the download button within the nav */
+.nav__item .button {
+    padding: 0;
+    font-size: var(--normal-font-size);
+    margin-top: 0;
+    margin-left: var(--mb-1);
+    background-color: transparent;
+    color: var(--first-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.nav__item .button .button__icon {
+    margin-right: var(--mb-0-25);
+    margin-bottom: 0;
+    color: var(--first-color); /* Ensure icon color matches the link text color */
+}
+
+.nav__item .button:hover {
+    color: var(--first-color-alt);
+    background-color: transparent;
+}
+
+  
