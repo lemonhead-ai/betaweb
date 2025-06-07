@@ -41,8 +41,8 @@
     --h1-font-size: 2rem;
     --h2-font-size: 1.5rem;
     --h3-font-size: 1.25rem;
-    --normal-font-size: 1.5rem;
-    --small-font-size: .875rem;
+    --normal-font-size: 1.09rem;
+    --small-font-size: 0.95rem;
     --smaller-font-size: .75rem;
 
     /*========== Font weight ==========*/
@@ -75,9 +75,9 @@
         --h1-font-size: 1.75rem;
         --h2-font-size: 1.25rem;
         --h3-font-size: 1rem;
-        --normal-font-size: .938rem;
+        --normal-font-size: 1.095rem;
         --small-font-size: .813rem;
-        --smaller-font-size: .75rem;
+        --smaller-font-size: .85rem;
     }
 }
 
@@ -98,7 +98,7 @@ body {
   font-size: var(--normal-font-size);
   background-color: var(--body-color);
   color: var(--text-color);
-  --current-bg-image: url('../assets/green.png'); /* Define CSS variable for background image */
+  --current-bg-image: url('../assets/images/green.png'); /* Define CSS variable for background image */
 }
 
 /* Pseudo-element for blurred background image */
@@ -1304,6 +1304,12 @@ textarea.contact__input{
     .contact__information{
         padding-right: 1.5rem;
     }
+    .footer-owner {
+        font-size: var(--smaller-font-size);
+        color: var(--text-color-light); /* Light grey legal links */
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -1426,7 +1432,9 @@ textarea.contact__input{
     }
     .footer__copy{
         order: -1;
+        text-align: right;
         font-size: var(--smaller-font-size);
+        margin-top: 0;
     }
 
     .footer__container{
@@ -1445,14 +1453,14 @@ textarea.contact__input{
         justify-content: center;
         margin-bottom: 0;
     }
-
-    .footer__copy{
-        text-align: right;
-        margin-top: 0;
-    }
-
     .footer-main {
         padding-top: 10rem; /* Further increased top padding on larger screens */
+    }
+    .footer-owner {
+        font-size: var(--smaller-font-size);
+        color: var(--text-color-light); /* Light grey legal links */
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
     }
 }
 
@@ -1496,7 +1504,13 @@ textarea.contact__input{
     }
     .footer__copy{
         margin-top: 4.5rem;
+    }.footer-owner {
+        font-size: var(--smaller-font-size);
+        color: var(--text-color-light); /* Light grey legal links */
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
     }
+
 }
 
 
